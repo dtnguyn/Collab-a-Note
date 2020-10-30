@@ -1,8 +1,7 @@
 import React from "react";
 import { CardDeck } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-
-import courses from "./courses-list";
+import { db } from "../../../controller/api/firebase";
 
 const Course = (props) => {
   return (
@@ -12,21 +11,41 @@ const Course = (props) => {
     >
       <Card.Img variant="top" src={props.img} className="courseThumbnail" />
       <Card.Body>
-        <Card.Title className="card-title">{props.courseName}</Card.Title>
+        <Card.Title className="card-title">{props.course_name}</Card.Title>
         <Card.Subtitle className="card-subtitle">{props.prof}</Card.Subtitle>
       </Card.Body>
     </Card>
   );
 };
 
-const CourseListHomePage = () => {
-  return (
-    <CardDeck className="courseCardDeck">
-      {courses.map((course) => {
-        return <Course {...course}></Course>;
-      })}
-    </CardDeck>
-  );
-};
+class CourseListHomePage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: false,
+      courses: [],
+    };
+  }
+
+  componentDidMount() {
+    db.collection("course")
+      .get()
+      .then((querySnapshot) => {
+        const data = querySnapshot.docs.map((doc) => doc.data());
+        this.setState({ courses: data });
+      });
+  }
+
+  render() {
+    return (
+      <CardDeck className="courseCardDeck">
+        {this.state.courses.map((i) => {
+          return <Course {...i}></Course>;
+        })}
+      </CardDeck>
+    );
+  }
+}
 
 export default CourseListHomePage;

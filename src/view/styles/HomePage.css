@@ -81,3 +81,9 @@
   font-size: 100%;
   color: darkgray;
 }
+
+.dueDate h6 {
+  font-family: "system-ui";
+  font-size: 75%;
+  color: lightgray;
+}
