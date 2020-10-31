@@ -57,6 +57,10 @@
   color: lightgray;
 }
 
+.recent-notes-title {
+  padding-left: 10px;
+}
+
 .dueDateList h1 {
   font-family: "system-ui";
   margin: 10px;

@@ -1,5 +1,17 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
+import { Row } from "react-bootstrap";
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
+import Button from "@material-ui/core/Button";
+import { MenuItem } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Selection from "../../components/InputSelector";
 
 import { db } from "../../../controller/api/firebase";
 
@@ -58,7 +70,12 @@ class DueDatesHomePage extends React.Component {
   render() {
     return (
       <section className="dueDateList">
-        <h1>Upcoming Assignments: </h1>
+        <Row className="recent-notes-title">
+          <h1>Upcoming Assignments</h1>
+          <IconButton aria-label="add">
+            <AddIcon onClick={this.props.openDialog} />
+          </IconButton>
+        </Row>
         <ListGroup variant="flush">
           {this.state.due_dates.map((i) => {
             return (
@@ -73,4 +90,56 @@ class DueDatesHomePage extends React.Component {
   }
 }
 
-export default DueDatesHomePage;
+export default function NewDueDateDialog() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <DueDatesHomePage openDialog={handleClickOpen} />
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="due-date-form-dialog-title"
+      >
+        <DialogTitle id="due-date-form-dialog-title">
+          New Assignment
+        </DialogTitle>
+        <DialogContent>
+          <TextField
+            id="course_select"
+            label="Course"
+            value="20"
+            fullWidth
+            select
+          >
+            <Selection collection={"course"} />
+          </TextField>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Title"
+            type="email"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
