@@ -24,6 +24,17 @@ class RecentNote extends React.Component {
     };
   }
 
+  componentDidMount() {
+    db.collection("courses")
+      .where("__name__", "==", this.props.courseId)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.map((doc) => {
+          this.setState({ course_name: doc.data().name });
+        });
+      });
+  }
+
   render() {
     const date = this.props.lastUpdate.toDate().toDateString();
     return (
@@ -102,15 +113,6 @@ export default function NewNoteDialog() {
         <DialogTitle id="due-date-form-dialog-title">New Note</DialogTitle>
         <DialogContent>
           <TextField
-            id="course_select"
-            label="Course"
-            value="20"
-            fullWidth
-            select
-          >
-            <Selection collection={"course"} />
-          </TextField>
-          <TextField
             autoFocus
             margin="dense"
             id="name"
@@ -118,6 +120,15 @@ export default function NewNoteDialog() {
             type="email"
             fullWidth
           />
+          <TextField
+            id="course_select"
+            label="Course"
+            value="20"
+            fullWidth
+            select
+          >
+            <Selection collection={"courses"} />
+          </TextField>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

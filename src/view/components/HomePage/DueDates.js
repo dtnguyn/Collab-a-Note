@@ -9,6 +9,8 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import moment from "moment";
 
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Selection from "../../components/InputSelector";
@@ -26,12 +28,12 @@ class DueDate extends React.Component {
   }
 
   componentDidMount() {
-    db.collection("course")
-      .where("__name__", "==", this.props.course_id)
+    db.collection("courses")
+      .where("__name__", "==", this.props.courseId)
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.map((doc) => {
-          this.setState({ course_name: doc.data().course_name });
+          this.setState({ course_name: doc.data().name });
         });
       });
   }
@@ -60,6 +62,8 @@ class DueDatesHomePage extends React.Component {
 
   componentDidMount() {
     db.collection("due_date")
+      .orderBy("deadline", "asc")
+      .limit(5)
       .get()
       .then((querySnapshot) => {
         const data = querySnapshot.docs.map((doc) => doc.data());
@@ -114,15 +118,6 @@ export default function NewDueDateDialog() {
         </DialogTitle>
         <DialogContent>
           <TextField
-            id="course_select"
-            label="Course"
-            value="20"
-            fullWidth
-            select
-          >
-            <Selection collection={"course"} />
-          </TextField>
-          <TextField
             autoFocus
             margin="dense"
             id="name"
@@ -130,6 +125,36 @@ export default function NewDueDateDialog() {
             type="email"
             fullWidth
           />
+          <TextField
+            id="course_select"
+            label="Course"
+            fullWidth
+            m={10}
+            p={10}
+            select
+            textFieldProps={{
+              label: "Label",
+              InputLabelProps: {
+                shrink: true,
+              },
+            }}
+          >
+            <Selection collection={"courses"} />
+          </TextField>
+          <TextField
+            id="deadline-input"
+            type="datetime-local"
+            label=" "
+            className="deadline-entry"
+            m={10}
+            p={10}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <FormHelperText id="standard-Deadline-helper-text">
+            Deadline
+          </FormHelperText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

@@ -61,6 +61,10 @@
   padding-left: 10px;
 }
 
+.deadline-entry {
+  padding: 10px;
+  margin: 20px;
+}
 .dueDateList h1 {
   font-family: "system-ui";
   margin: 10px;
