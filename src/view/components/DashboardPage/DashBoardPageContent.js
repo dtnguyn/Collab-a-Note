@@ -2,18 +2,18 @@ import React, { useContext, useEffect } from 'react';
 import DashBoardPageBody from './DashBoardPageBody';
 import DashBoardPageHeader from './DashBoardPageHeader';
 import "../../styles/DashBoard.css"
-import {ClassContext, ClassProvider} from "../../context/ClassContext";
-import { getClases } from "../../../controller/note"
+import {CourseContext, CourseProvider} from "../../context/CourseContext";
+import { getCourses } from "../../../controller/course"
 
 
 const DashBoardPageContent = () => {
 
-    const [classes, setClasses] = useContext(ClassContext)
+    const [courses , setCourses] = useContext(CourseContext)
 
     useEffect(()=> {
-        getClases("123123", (response) => {
+        getCourses("123123", (response) => {
             if(response.status){
-                setClasses(response.data)
+                setCourses(response.data)
             } else {
                 //Handle Error
             }

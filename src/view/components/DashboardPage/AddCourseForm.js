@@ -10,19 +10,21 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { v4 as uuidv4 } from 'uuid';
 
 
-const AddClassForm = (props) => {
+const AddCourseForm = (props) => {
 
-    const [newClass, setNewClass] = useState({
+    const [newCourse, setNewCourse] = useState({
         id: "",
-        name: "Undefined",
+        name: "",
         ownerId: "123123",
+        teacher: "",
+        courseCode: "",
         owner: {
             id: "123123",
             name: "Dung Nguyen",
             email: "adron0914@gmail.com"
         },
-        creationDate: "Oct 25, 2000",
-        lastUpdate: "Oct 25, 2000",
+        creationDate: "",
+        lastUpdate: "",
         coverImg: "https://i.pinimg.com/originals/be/96/a1/be96a12fe9f5fd8eaae8518455b4b6a3.png"
     })
 
@@ -30,49 +32,81 @@ const AddClassForm = (props) => {
         return new Date();
     }
 
-    const createNewClassId = () => {
+    const createNewCourseId = () => {
         const id = uuidv4()
         console.log(id)
         return id;
     }
 
-    const handleClassNameChange = (event) => {
-        setNewClass({
-            ...newClass,
+    const handleCourseNameChange = (event) => {
+        setNewCourse({
+            ...newCourse,
             name: event.target.value
+        })
+    }
+
+    const handleCourseCodeChange = (event) => {
+        setNewCourse({
+            ...newCourse,
+            courseCode: event.target.value
+        })
+    }
+
+    const handleCourseTeacherChange = (event) => {
+        setNewCourse({
+            ...newCourse,
+            teacher: event.target.value
         })
     }
 
     return (
         <div>
         <Dialog open={props.formStatus} onClose={props.handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Add class</DialogTitle>
+            <DialogTitle id="form-dialog-title">Add course</DialogTitle>
             <DialogContent>
             <DialogContentText>
-                Add class to your dashboard.
+                Add course to your dashboard.
             </DialogContentText>
             <TextField
                 autoFocus
                 margin="dense"
                 id="name"
-                label="Class name"
+                label="Course name*"
                 type="text"
                 fullWidth
-                onChange={(e) => handleClassNameChange(e)}
+                onChange={(e) => handleCourseNameChange(e)}
+            />
+            <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Course code"
+                type="text"
+                fullWidth
+                onChange={(e) => handleCourseCodeChange(e)}
+            />
+            <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Course teacher"
+                type="text"
+                fullWidth
+                onChange={(e) => handleCourseTeacherChange(e)}
             />
             </DialogContent>
             <DialogActions>
             <Button onClick={props.handleClose} color="primary">
                 Cancel
             </Button>
-            <Button onClick={() => {
+            <Button disabled={newCourse.name === ""} onClick={() => {
 
-                const id = createNewClassId();
+                const id = createNewCourseId();
                 const creationDate = getCurrentTime();
                 const lastUpdate = getCurrentTime();
-
-                props.addClass({
-                    ...newClass,
+            
+                props.addCourse({
+                    ...newCourse,
                     id,
                     creationDate,
                     lastUpdate,
@@ -87,4 +121,4 @@ const AddClassForm = (props) => {
 }
 
 
-export default AddClassForm
+export default AddCourseForm

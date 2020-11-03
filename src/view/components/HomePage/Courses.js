@@ -29,7 +29,7 @@ class CourseListHomePage extends React.Component {
   }
 
   componentDidMount() {
-    db.collection("course")
+    db.collection("courses")
       .get()
       .then((querySnapshot) => {
         const data = querySnapshot.docs.map((doc) => doc.data());

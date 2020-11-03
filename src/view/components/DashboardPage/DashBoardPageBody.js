@@ -2,8 +2,7 @@
 import React, { useState } from 'react';
 import "../../styles/DashBoard.css"
 
-import DashBoardClasses from './DashBoardClasses';
-import DashBoardNotes from './DashBoardNotesPage';
+import DashBoardCourses from './DashBoardCourses';
 
 
 const DashBoardPageBody = () => {
@@ -11,7 +10,7 @@ const DashBoardPageBody = () => {
 
     return(
         <div className="dashboard-body">
-            <DashBoardClasses/>
+            <DashBoardCourses/>
         </div>
         
     )

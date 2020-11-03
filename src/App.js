@@ -4,7 +4,7 @@ import NotePage from "./view/pages/NotePage";
 import DashBoardPage from "./view/pages/DashBoardPage";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NavigationBar from "./view/components/shared/NavigationBar";
-import DashBoardNotesPage from "./view/components/DashboardPage/DashBoardNotesPage";
+import CourseDetailPage from "./view/pages/CourseDetailPage";
 
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
         <Route path="/note" component={NotePage}/>
         
         <Route path="/dashboard" exact component={DashBoardPage}/>
-        <Route path="/dashboard/course" component={DashBoardNotesPage}/>
+        <Route path="/dashboard/course" component={CourseDetailPage}/>
       </Switch>
     </Router>
   )
