@@ -14,7 +14,7 @@ const AddNoteForm = (props) => {
 
     const [newNote, setNewNote] = useState({
         id: "",
-        classId: props.classItem.id,
+        courseId: props.course.id,
         title: "Untitled",
         content: "Your note goes here...",
         ownerId: "123123",
@@ -50,7 +50,7 @@ const AddNoteForm = (props) => {
             <DialogTitle id="form-dialog-title">Add Note</DialogTitle>
             <DialogContent>
             <DialogContentText>
-                Add note to your {props.classItem.name} class.
+                Add note to your {props.course.name} course.
             </DialogContentText>
             <TextField
                 autoFocus

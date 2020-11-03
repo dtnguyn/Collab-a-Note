@@ -13,7 +13,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import Selection from "../../components/InputSelector";
 import { db } from "../../../controller/api/firebase";
-import AddNoteForm from "../DashboardPage/AddNoteForm";
+// import AddNoteForm from "../DashboardPage/AddNoteForm";
 
 class RecentNote extends React.Component {
   constructor(props) {
@@ -22,6 +22,17 @@ class RecentNote extends React.Component {
       notes: [],
       course_name: "",
     };
+  }
+
+  componentDidMount() {
+    db.collection("courses")
+      .where("__name__", "==", this.props.courseId)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.map((doc) => {
+          this.setState({ course_name: doc.data().name });
+        });
+      });
   }
 
   render() {
@@ -102,15 +113,6 @@ export default function NewNoteDialog() {
         <DialogTitle id="due-date-form-dialog-title">New Note</DialogTitle>
         <DialogContent>
           <TextField
-            id="course_select"
-            label="Course"
-            value="20"
-            fullWidth
-            select
-          >
-            <Selection collection={"course"} />
-          </TextField>
-          <TextField
             autoFocus
             margin="dense"
             id="name"
@@ -118,6 +120,15 @@ export default function NewNoteDialog() {
             type="email"
             fullWidth
           />
+          <TextField
+            id="course_select"
+            label="Course"
+            value="20"
+            fullWidth
+            select
+          >
+            <Selection collection={"courses"} />
+          </TextField>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
