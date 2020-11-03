@@ -28,16 +28,6 @@ class DueDate extends React.Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
-    // db.collection("course")
-    //   .where("__name__", "==", this.props.course_id)
-    //   .get()
-    //   .then((querySnapshot) => {
-    //     querySnapshot.docs.map((doc) => {
-    //       this.setState({ course_name: doc.data().course_name });
-    //     });
-    //   });
-=======
     db.collection("courses")
       .where("__name__", "==", this.props.courseId)
       .get()
@@ -46,7 +36,6 @@ class DueDate extends React.Component {
           this.setState({ course_name: doc.data().name });
         });
       });
->>>>>>> 0d1a1ff38e16195ebb979ea5ef2f9419e540214b
   }
 
   render() {
