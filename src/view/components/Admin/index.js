@@ -4,8 +4,8 @@ import { compose } from 'recompose';
 
 import { withAuthorization, withEmailVerification } from '../Session';
 import { UserList, UserItem } from '../Users';
-import * as ROLES from '../../constants/roles';
-import * as ROUTES from '../../constants/routes';
+import * as ROLES from './view/components/constants/roles';
+import * as ROUTES from './view/components/constants/routes';
 
 const AdminPage = () => (
   <div>
