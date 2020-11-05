@@ -5,14 +5,16 @@ import DashBoardPage from "./view/pages/DashBoardPage";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NavigationBar from "./view/components/shared/NavigationBar";
 import CourseDetailPage from "./view/pages/CourseDetailPage";
-import SignUpPage from './view/pages/SignUp';
-import SignInPage from './view/pages/SignIn';
-import PasswordForgetPage from './view/pages/PasswordForget';
-import AccountPage from './view/pages/Account';
-import AdminPage from './view/pages/Admin';
+import Navigation from './view/components/Navigation';
+import LandingPage from './view/components/Landing';
+import SignUpPage from './view/components/SignUp';
+import SignInPage from './view/components/SignIn';
+import PasswordForgetPage from './view/components/PasswordForget';
+import AccountPage from './view/components/Account';
+import AdminPage from './view/components/Admin';
 
-import * as ROUTES from '../../constants/routes';
-import { withAuthentication } from './view/pages/Session';
+import * as ROUTES from './view/constants/routes';
+import { withAuthentication } from './view/components/Session';
 
 const App = () => (
   <Router>
