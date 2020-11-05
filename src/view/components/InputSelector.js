@@ -24,7 +24,7 @@ export default class Selection extends React.Component {
     return (
       <React.Fragment>
         {this.state.values.map((i) => {
-          return <MenuItem>{i.course_name}</MenuItem>;
+          return <MenuItem>{i.name}</MenuItem>;
         })}
       </React.Fragment>
     );

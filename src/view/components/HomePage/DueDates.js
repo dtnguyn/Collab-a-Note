@@ -28,14 +28,14 @@ class DueDate extends React.Component {
   }
 
   componentDidMount() {
-    // db.collection("course")
-    //   .where("__name__", "==", this.props.course_id)
-    //   .get()
-    //   .then((querySnapshot) => {
-    //     querySnapshot.docs.map((doc) => {
-    //       this.setState({ course_name: doc.data().course_name });
-    //     });
-    //   });
+    db.collection("courses")
+      .where("__name__", "==", this.props.courseId)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.map((doc) => {
+          this.setState({ course_name: doc.data().course_name });
+        });
+      });
   }
 
   render() {
