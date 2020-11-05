@@ -8,7 +8,6 @@ import CourseDetailPage from "./view/pages/CourseDetailPage";
 import SignUpPage from './view/pages/SignUp';
 import SignInPage from './view/pages/SignIn';
 import PasswordForgetPage from './view/pages/PasswordForget';
-import HomePage from './view/pages/Home';
 import AccountPage from './view/pages/Account';
 import AdminPage from './view/pages/Admin';
 
