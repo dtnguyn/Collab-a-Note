@@ -8,7 +8,7 @@ const getDueDates = (courseId, callback) => {
         let dueDates = []
         querySnapshot.forEach(function(doc) {
             var date = doc.data();
-            
+            date.deadline = date.deadline.toDate();
             dueDates.push(date)
         });
         callback(apiResponse(true, "Getting due dates sucessfully.", dueDates));

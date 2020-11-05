@@ -57,8 +57,8 @@ const DueDates = (props) => {
                 <AddIcon className=""/>
             </IconButton>
 
-            {dueDates.map(date => (
-                <DueDateItem dueDate={date}/>
+            {dueDates.map((date, index) => (
+                <DueDateItem key={index} dueDate={date}/>
             ))}
         </div>
     )

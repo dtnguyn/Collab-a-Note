@@ -35,7 +35,33 @@ const getNotes = (courseId, callback) => {
 }
 
 
+let currentNoteContent = "";
+
+const onChangeNote = (newContent) => {
+    currentNoteContent = newContent;
+}
+
+
+const updateNote = (note, callback) => {
+    console.log(currentNoteContent);
+    const updatedNote = {
+        ...note,
+        content: currentNoteContent
+    }
+    db.collection("notes").doc(updatedNote.id).set(updatedNote)
+    .then(function() {
+        console.log("Edit note sucessfully!");
+        callback(apiResponse(true, "Edit note successfully.", null))
+    })
+    .catch(function(error) {
+        console.error("Error when editting note: ", error);
+        callback(apiResponse(false, "There's some error! Please try again", null))
+    });
+}
+
 export {
     addNote,
-    getNotes
+    getNotes,
+    onChangeNote,
+    updateNote
 }

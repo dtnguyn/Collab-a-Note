@@ -1,5 +1,6 @@
 import React from "react";
 import HomePage from "./view/pages/HomePage";
+import AuthPage from "./view/pages/AuthPage"
 import NotePage from "./view/pages/NotePage";
 import DashBoardPage from "./view/pages/DashBoardPage";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -14,9 +15,8 @@ function App() {
       <NavigationBar/>
       <Switch>
         <Route path="/" exact component={HomePage}/>
-        <Route path="/auth" component={HomePage}/>
+        <Route path="/auth" component={AuthPage}/>
         <Route path="/note" component={NotePage}/>
-        
         <Route path="/dashboard" exact component={DashBoardPage}/>
         <Route path="/dashboard/course" component={CourseDetailPage}/>
       </Switch>

@@ -6,7 +6,7 @@ const DueDateItem = ({dueDate}) => {
         <div className="dueDate">
             <h2>{dueDate.title}</h2>
             <h4>
-                {dueDate.deadline}
+                {dueDate.deadline.toString()}
             </h4>
         </div>
     )

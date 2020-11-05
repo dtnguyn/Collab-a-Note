@@ -38,10 +38,13 @@ const AddDueDateForm = (props) => {
     }
 
     const handleDeadlineChange = (event) => {
+        
+        let date = new Date(event.target.value)
         setNewDueDate({
             ...newDueDate,
-            deadline: event.target.value
+            deadline: date
         })
+
     }
 
     if(!newDueDate) return null;

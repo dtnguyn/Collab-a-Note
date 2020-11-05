@@ -6,13 +6,12 @@ import { Button, Fab, IconButton } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { getNotes, addNote } from "../../../controller/note"
 import AddNoteForm from './AddNoteForm';
-
-
+import { useHistory } from 'react-router-dom'
 
 const Notes = (props) => {
     const [notes, setNotes] = useState([]);
     const [addNoteForm, setAddNoteForm] = useState(false)
-
+    const history = useHistory();
 
     const addNoteIconStyle = {
         marginRight: "30px",
@@ -34,6 +33,14 @@ const Notes = (props) => {
             }
             setAddNoteForm(false)
         })
+    }
+
+
+    
+
+    const moveToNotePage = (note) => {
+        history.push(`/note/${note.id}`, note) 
+    
     }
 
     useEffect(() => {
@@ -71,6 +78,7 @@ const Notes = (props) => {
                 <NoteItem
                     key={note.id}
                     title={note.title}
+                    onClick={() => moveToNotePage(note)}
                     dateCreation={note.creationDate.toLocaleDateString("en-US")}
                     dateUpdate={note.lastUpdate.toLocaleDateString("en-US")}
                 />
