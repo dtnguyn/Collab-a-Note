@@ -1,7 +1,18 @@
 body {
   font-family: Montserrat-Medium;
+  overflow: hidden;
 }
 
+p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  /* Adds a hyphen where the word breaks */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
 
 
 

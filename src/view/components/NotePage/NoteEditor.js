@@ -1,37 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { Editor } from '@tinymce/tinymce-react';
 import { propTypes } from "react-bootstrap/esm/Image";
-import { updateNote, onChangeNote } from "../../../controller/note"
+import { updateNote, onChangeNote, getSingleNote } from "../../../controller/note"
 
 const NoteEditor = (props) => {
 
-    const [noteContent, setNoteContent] = useState(props.note.content);
+    const [note, setNote] = useState({});
     
 
     const onEditorChange = (content) => {
-        setNoteContent(content)
-        onChangeNote(content);
+
+        const updatedNote = {
+            ...note,
+            content
+        }
+        onChangeNote(updatedNote);
+
+        setNote(updatedNote)
+        
     }
 
     const saveNote = () => {
-        
-        updateNote(props.note, (response) => {
-            if(response.status){
-                alert(response.message)
-            } else {
+        updateNote((response) => {
+            if(!response.status){
+                alert("response.message")
                 //Handle Error
             }
         })
     }
 
+    useEffect(() => {
+        getSingleNote(props.noteId, (response) => {
+            if(response.status){
+                console.log(response.data)
+                setNote(response.data)
+            } else {
+                alert(response.message)
+                //Handle Error
+            }
+        })
+    },[])
+
+    if(!note) return null
 
     return(
         <div>
             <div>
             <Editor
                 apiKey="3ki3s2vgpnwgdgsz9hijujj9u4683mukery5oki29jnxhtgz"
-                initialValue={props.note.content}
-                value={noteContent}
+                initialValue={note.content}
+                value={note.content}
                 onEditorChange={(content, editor) => {onEditorChange(content)}}
 
                 init={{

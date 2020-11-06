@@ -9,14 +9,16 @@ const NotePage = (props) => {
     const note = props.location.state;
 
     return(
-        <div className="row">
+        <div className="row note-page-container">
             <div  className="col-md-8 col-sm-12">
                 <NoteEditor
-                    note={note}
+                    noteId={note.id}
                 />
             </div>
             <div className="col-md-4 sol-sm-12">
-                <Comments/>
+                <Comments
+                    noteId={note.id}
+                />
             </div>
            
         </div>
