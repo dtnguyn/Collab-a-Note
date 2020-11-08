@@ -53,9 +53,9 @@ const NoteEditor = (props) => {
                 onEditorChange={(content, editor) => {onEditorChange(content)}}
 
                 init={{
-                height: "100vh",
+                height: "94vh",
                 menubar: true,
-                autosave_interval: '5s',
+                autosave_interval: '1s',
                 save_onsavecallback: function(){ saveNote() },
                 plugins: [
                     'advlist autolink lists link image', 

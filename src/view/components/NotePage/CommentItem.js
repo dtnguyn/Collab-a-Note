@@ -1,7 +1,18 @@
 import React from 'react';
 import UserImage from '../shared/UserImage'
+import { IconButton } from '@material-ui/core';
+import { Delete } from '@material-ui/icons/';
+
 
 const CommentItem = (props) => {
+
+    const deleteButtonStyle = {
+        width: "30px",
+        height: "30px",
+        margin: "5px"
+    }
+
+
     return(
         <div className="row">
             <div className="col-1">
@@ -11,7 +22,17 @@ const CommentItem = (props) => {
             <div className="col-11">
                 <div  className="comment-content-container">
                     <p className="comment-username">{props.comment.author.username}</p>
+                    <p className="comment-creation-date">{props.comment.creationDate.toLocaleDateString("en-US")}</p>
                     <p className="comment-content">{props.comment.content}</p>
+                    <div className="comment-buttons">
+                        
+                        <IconButton 
+                            onClick={() => {props.onClickDelete(props.comment.id)}}
+                            style={deleteButtonStyle}>
+                            <Delete/>
+                        </IconButton>
+
+                    </div>
                 </div>
             </div>
             

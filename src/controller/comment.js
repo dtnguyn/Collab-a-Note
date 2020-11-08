@@ -30,8 +30,35 @@ const getComments = (noteId, callback) => {
     });
 }
 
+const updateComment = (updatedComment, callback) => {
+    db.collection("comments").doc(updatedComment.id).set(updatedComment)
+    .then(function() {
+        console.log("Update comment sucessfully!");
+        callback(apiResponse(true, "Update comment successfully.", null))
+    })
+    .catch(function(error) {
+        console.error("Error when updating comment: ", error);
+        callback(apiResponse(false, "There's some error! Please try again", null))
+    });
+}
+
+
+const deleteComment = (commentId, callback) => {
+    db.collection("comments").doc(commentId).delete()
+    .then(function() {
+        console.log("Delete comment sucessfully!");
+        callback(apiResponse(true, "Delete comment successfully.", null))
+    })
+    .catch(function(error) {
+        console.error("Error when deleting comment: ", error);
+        callback(apiResponse(false, "There's some error! Please try again", null))
+    });
+}
+
 
 export {
     addComment,
-    getComments
+    getComments,
+    deleteComment,
+    updateComment
 }

@@ -1,11 +1,12 @@
 
 .note-page-container{
+  height: 94vh;
   overflow-y: hidden;
 }
 
 
 .comments-container{
-  height: 100vh;
+  height: 94vh;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -23,7 +24,7 @@
 
 
 .comment-content-container{
-  background-color: rgb(201, 199, 199);
+  background-color: rgb(224, 222, 222);
   border-radius: 10px;
   padding: 10px;
   margin: 0 15px 20px 15px;
@@ -32,9 +33,22 @@
 .comment-username{
   font-size: large;
   font-weight: bold;
-  margin: 0 0 10px 0;
+  margin: 0;
+}
+
+.comment-creation-date{
+  margin: 0;
+  font-size: 0.9rem;
 }
 
 .comment-content{
   margin: 10px 0;
+}
+
+.comment-buttons{
+  position: absolute;
+  top: 5px;
+  right: 40px;
+  width: auto;
+  height: 50px;
 }

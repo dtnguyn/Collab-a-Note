@@ -3,12 +3,12 @@ import CommentItem from './CommentItem';
 import { Button, Fab, IconButton } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import AddCommentForm from './AddCommentForm';
-import { addComment, getComments } from '../../../controller/comment';
+import { addComment, deleteComment, getComments, updateComment } from '../../../controller/comment';
 
 const Comments = (props) => {
 
-    const [comments, setComments] = useState([])
-    const [addCommentForm, setAddCommentForm] = useState(false)
+    const [comments, setComments] = useState([]);
+    const [addCommentForm, setAddCommentForm] = useState(false);
 
 
     const addNoteIconStyle = {
@@ -27,6 +27,16 @@ const Comments = (props) => {
             setAddCommentForm(false)
             if(response.status){
                 setComments(prevComments => [...prevComments, comment])
+            } else {
+                alert(response.message)
+            }
+        })
+    }
+
+    const handleDeleteComment = (commentId) => {
+        deleteComment(commentId, (response) => {
+            if(response.status){
+                setComments(comments.filter(comment => commentId !== comment.id))
             } else {
                 alert(response.message)
             }
@@ -60,9 +70,12 @@ const Comments = (props) => {
                 handleClose={() => setAddCommentForm(false)}
                 addComment={(comment) => handleAddComment(comment)}
             />
-
             {comments.map((comment, index) => (
-                <CommentItem key={index} comment={comment}/>
+                <CommentItem 
+                    key={index} 
+                    comment={comment}
+                    onClickDelete={(commentId) => {handleDeleteComment(commentId)}}
+                />
             ))}
             
 
