@@ -13,7 +13,6 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import Selection from "../../components/InputSelector";
 import { db } from "../../../controller/api/firebase";
-// import AddNoteForm from "../DashboardPage/AddNoteForm";
 
 class RecentNote extends React.Component {
   constructor(props) {

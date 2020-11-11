@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
+import React, { Component, useContext } from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 
-import { SignUpLink } from '../SignUp';
-import { PasswordForgetLink } from '../PasswordForget';
-import { withFirebase } from '../Firebase';
-import * as ROUTES from '../../constants/routes';
+import { SignUpLink } from "../SignUp";
+import { PasswordForgetLink } from "../PasswordForget";
+import { firebaseAuth } from "../../../controller/provider/AuthProvider";
+import * as ROUTES from "../constants/routes";
 
 const SignInPage = () => (
   <div>
@@ -17,13 +17,13 @@ const SignInPage = () => (
 );
 
 const INITIAL_STATE = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
   error: null,
 };
 
 const ERROR_CODE_ACCOUNT_EXISTS =
-  'auth/account-exists-with-different-credential';
+  "auth/account-exists-with-different-credential";
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
   An account with an E-Mail address to
@@ -39,44 +39,38 @@ class SignInFormBase extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-  onSubmit = event => {
-    const { email, password } = this.state;
-
-    this.props.firebase
-      .doSignInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
-      })
-      .catch(error => {
-        this.setState({ error });
-      });
-
-    event.preventDefault();
+  handleSubmit = (e) => {
+    const { handleSignin } = useContext(firebaseAuth);
+    handleSignin();
+    e.preventDefault();
+    console.log("handleSubmit");
   };
 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChange = (e) => {
+    const { inputs, setInputs } = useContext(firebaseAuth);
+    const { name, value } = e.target;
+    console.log(inputs);
+    setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
   render() {
     const { email, password, error } = this.state;
 
-    const isInvalid = password === '' || email === '';
+    const isInvalid = password === "" || email === "";
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <input
           name="email"
           value={email}
-          onChange={this.onChange}
+          onChange={this.handleChange}
           type="text"
           placeholder="Email Address"
         />
         <input
           name="password"
           value={password}
-          onChange={this.onChange}
+          onChange={this.handleChange}
           type="password"
           placeholder="Password"
         />
@@ -90,14 +84,8 @@ class SignInFormBase extends Component {
   }
 }
 
-
-const SignInForm = compose(
-  withRouter,
-  withFirebase,
-)(SignInFormBase);
-
-
+const SignInForm = SignInFormBase;
 
 export default SignInPage;
 
-export { SignInForm};
+export { SignInForm };
