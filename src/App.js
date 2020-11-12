@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import HomePage from "./view/pages/HomePage";
 import Signup from "./view/components/Signup/index";
+import Signin from "./view/components/Signin/index";
 import AuthPage from "./view/pages/AuthPage";
 import NotePage from "./view/pages/NotePage";
 import DashBoardPage from "./view/pages/DashBoardPage";
@@ -26,11 +27,12 @@ function App() {
       <Router>
         <NavigationBar />
         <Switch>
-          <Route path="/" exact component={Signup} />
+          <Route path="/" exact component={DashBoardPage} />
+          <Route path="/signup" exact component={Signup} />
+          <Route path="/signin" exact component={Signin} />
           <Route path="/home" exact component={HomePage} />
           <Route path="/auth" component={AuthPage} />
           <Route path="/note" component={NotePage} />
-          <Route path="/dashboard" exact component={DashBoardPage} />
           <Route path="/dashboard/course" component={CourseDetailPage} />
         </Switch>
       </Router>
