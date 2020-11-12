@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
-import { firebaseAuth } from "./controller/provider/AuthProvider";
-import Landing from "./view/components/Landing/index";
-import Signin from "./view/components/SignIn/index";
 import HomePage from "./view/pages/HomePage";
+import Signup from "./view/components/Signup/index";
 import AuthPage from "./view/pages/AuthPage";
 import NotePage from "./view/pages/NotePage";
 import DashBoardPage from "./view/pages/DashBoardPage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavigationBar from "./view/components/shared/NavigationBar";
 import CourseDetailPage from "./view/pages/CourseDetailPage";
+import { AuthProvider } from "./contexts/AuthContext";
 
 // import Navigation from './view/components/Navigation';
 // import LandingPage from './view/components/Landing';
@@ -22,22 +21,20 @@ import CourseDetailPage from "./view/pages/CourseDetailPage";
 // import { withAuthentication } from './view/components/Session';
 
 function App() {
-  const { token } = useContext(firebaseAuth);
   return (
-    <Router>
-      <NavigationBar />
-      <Switch>
-        <Route
-          path="/"
-          render={(rProps) => (token === null ? <Signin /> : <HomePage />)}
-        />
-        <Route path="/home" exact component={HomePage} />
-        <Route path="/auth" component={AuthPage} />
-        <Route path="/note" component={NotePage} />
-        <Route path="/dashboard" exact component={DashBoardPage} />
-        <Route path="/dashboard/course" component={CourseDetailPage} />
-      </Switch>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <NavigationBar />
+        <Switch>
+          <Route path="/" exact component={Signup} />
+          <Route path="/home" exact component={HomePage} />
+          <Route path="/auth" component={AuthPage} />
+          <Route path="/note" component={NotePage} />
+          <Route path="/dashboard" exact component={DashBoardPage} />
+          <Route path="/dashboard/course" component={CourseDetailPage} />
+        </Switch>
+      </Router>
+    </AuthProvider>
   );
 }
 

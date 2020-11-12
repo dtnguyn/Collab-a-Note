@@ -9,13 +9,10 @@ import "./fonts/Montserrat-Light.ttf";
 import "./fonts/Montserrat-Light.ttf";
 import "./fonts/Montserrat-Medium.ttf";
 import "./fonts/Montserrat-Bold.ttf";
-import AuthProvider from "./controller/provider/AuthProvider";
 
 ReactDOM.render(
   <BrowserRouter>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <App />
   </BrowserRouter>,
 
   document.getElementById("root")
