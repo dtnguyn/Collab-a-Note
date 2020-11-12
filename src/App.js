@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavigationBar from "./view/components/shared/NavigationBar";
 import CourseDetailPage from "./view/pages/CourseDetailPage";
 import { AuthProvider } from "./contexts/AuthContext";
+import PrivateRoute from "./view/components/PrivateRoute";
 
 // import Navigation from './view/components/Navigation';
 // import LandingPage from './view/components/Landing';
@@ -27,13 +28,12 @@ function App() {
       <Router>
         <NavigationBar />
         <Switch>
-          <Route path="/" exact component={DashBoardPage} />
+          <PrivateRoute path="/" exact component={DashBoardPage} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/signin" exact component={Signin} />
-          <Route path="/home" exact component={HomePage} />
-          <Route path="/auth" component={AuthPage} />
-          <Route path="/note" component={NotePage} />
-          <Route path="/dashboard/course" component={CourseDetailPage} />
+          <PrivateRoute path="/home" exact component={HomePage} />
+          <PrivateRoute path="/note" component={NotePage} />
+          <PrivateRoute path="/dashboard/course" component={CourseDetailPage} />
         </Switch>
       </Router>
     </AuthProvider>
