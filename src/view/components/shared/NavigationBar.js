@@ -5,14 +5,15 @@ import { useAuth } from "../../../contexts/AuthContext";
 
 const NavigationBar = () => {
   const [error, setError] = useState("");
-  const { logout } = useAuth();
+  const { signout } = useAuth();
   const history = useHistory();
 
   async function handleSignout() {
     setError("");
     try {
-      await logout();
-      history.push("/");
+      await signout();
+      history.push("/signin");
+      console.log("Successfully Logged");
     } catch {
       setError("Failed to log out");
     }
