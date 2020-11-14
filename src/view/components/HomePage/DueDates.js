@@ -31,7 +31,7 @@ class DueDate extends React.Component {
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.map((doc) => {
-          this.setState({ course_name: doc.data().course_name });
+          return this.setState({ course_name: doc.data().course_name });
         });
       });
   }

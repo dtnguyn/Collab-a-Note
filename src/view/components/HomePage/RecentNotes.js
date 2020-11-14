@@ -29,7 +29,7 @@ class RecentNote extends React.Component {
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.map((doc) => {
-          this.setState({ course_name: doc.data().name });
+          return this.setState({ course_name: doc.data().name });
         });
       });
   }
