@@ -32,7 +32,34 @@ const getCourses = (ownerId, callback) => {
     });
 }
 
+const deleteCourse = (courseId, callback) => {
+    db.collection("courses").doc(courseId).delete()
+    .then(function() {
+        console.log("Delete course sucessfully!");
+        callback(apiResponse(true, "Delete course successfully.", null))
+    })
+    .catch(function(error) {
+        console.error("Error when deleting course: ", error);
+        callback(apiResponse(false, "There's some error! Please try again", null))
+    });
+}
+
+
+const updateCourse = (updatedCourse, callback) => {
+    db.collection("courses").doc(updatedCourse.id).set(updatedCourse)
+    .then(function() {
+        console.log("Update course sucessfully!");
+        callback(apiResponse(true, "Update course successfully.", null))
+    })
+    .catch(function(error) {
+        console.error("Error when updating course: ", error);
+        callback(apiResponse(false, "There's some error! Please try again", null))
+    });
+}
+
 export {
     addCourse,
-    getCourses
+    getCourses,
+    deleteCourse,
+    updateCourse
 }

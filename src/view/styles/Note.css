@@ -12,7 +12,10 @@
 }
 
 .comments-title-container{
-  display: flex;
+  background-color: white;
+  height: fit-content;
+  position: relative;
+  padding: 15px;
 }
 
 .comments-title{
@@ -21,7 +24,13 @@
   font-family: Montserrat-Bold;
 }
 
-
+.comments-button{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: fit-content;
+  transform: translate(-50%, -50%);
+}
 
 .comment-content-container{
   background-color: rgb(224, 222, 222);

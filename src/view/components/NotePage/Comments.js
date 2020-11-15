@@ -11,15 +11,9 @@ const Comments = (props) => {
     const [addCommentForm, setAddCommentForm] = useState(false);
 
 
-    const addNoteIconStyle = {
-        marginRight: "30px",
+    const addCommentIconStyle = {
         width: "50px",
-        height: "50px",
-        top: "10px",
-        right: "10px",
-        bottom: 0,
-        left: "auto",
-        position: "absolute",
+        height: "50px"
     };
 
     const handleAddComment = (comment) => {
@@ -57,12 +51,20 @@ const Comments = (props) => {
 
     return (
         <div className="comments-container">
-            <h3 className="comments-title" >Comments</h3>
-            <IconButton 
-                onClick={() => {setAddCommentForm(true)}}
-                style={addNoteIconStyle}>
-                <AddIcon/>
-            </IconButton>
+            <div className="comments-title-container">
+                <h3 className="comments-title">Comments</h3>
+                <div className="comments-button">
+                    <IconButton 
+                        onClick={() => {setAddCommentForm(true)}}
+                        style={addCommentIconStyle}>
+                        <AddIcon/>
+                    </IconButton>
+                </div>
+
+                
+            </div>
+        
+            
 
             <AddCommentForm 
                 noteId={props.noteId}

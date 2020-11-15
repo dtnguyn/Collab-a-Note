@@ -1,15 +1,17 @@
-
-
 .detail-container{
+    overflow-y: auto;
     overflow-x: hidden;
+    height: 94vh;
+    width: 100vw;
 }
+
 
 .detail-title{
     font-family: Montserrat-Bold;
     text-align: center;
     margin-top: 30px;
     margin-bottom: 30px;
-}
+}   
 
 .detail-subtitle{
     font-size: 1.7rem;
@@ -55,12 +57,21 @@
 /* notes section */
 
 .notes-container{
-    position: relative;
     padding-left: 20px;
     padding-right: 20px;
-
 }
 
+.note-buttons-container{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.note-item-container{
+    cursor: pointer;
+    position: relative;
+    border-radius: 15px;
+}
 
 
 /* dueDates section */
@@ -78,4 +89,33 @@
     right: 0;
     left: auto;
     height: auto;
+}
+
+.due-date-item-container{
+    cursor: pointer;
+    font-size: 10%;
+    text-decoration: none;
+    position: relative;
+}
+
+.due-date-item-title{
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+
+.due-date-item-date{
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.due-date-item-button{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.past-title {
+    color: red;
+    font-size: 16px;
 }

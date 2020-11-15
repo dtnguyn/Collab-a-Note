@@ -77,10 +77,37 @@ const updateNote = (callback) => {
     });
 }
 
+
+const deleteNote = (noteId, callback) => {
+    db.collection("notes").doc(noteId).delete()
+    .then(function() {
+        console.log("Delete note sucessfully!");
+        callback(apiResponse(true, "Delete note successfully.", null))
+    })
+    .catch(function(error) {
+        console.error("Error when deleting note: ", error);
+        callback(apiResponse(false, "There's some error! Please try again", null))
+    });
+}
+
+const updateNoteTitle = (updatedNote, callback) => {
+    db.collection("notes").doc(updatedNote.id).set(updatedNote)
+    .then(function() {
+        console.log("Update note title sucessfully!");
+        callback(apiResponse(true, "Update note title successfully.", null))
+    })
+    .catch(function(error) {
+        console.error("Error when updating note title: ", error);
+        callback(apiResponse(false, "There's some error! Please try again", null))
+    });
+}
+
 export {
     addNote,
     getNotes,
     getSingleNote,
     onChangeNote,
-    updateNote
+    updateNote,
+    deleteNote,
+    updateNoteTitle
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { IconButton } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import AddDueDateForm from './AddDueDateForm';
-import {addDueDate, getDueDates} from "../../../controller/dueDate"
+import {addDueDate, getDueDates, deleteDueDate} from "../../../controller/dueDate"
 import DueDateItem from './DueDateItem';
 
 const DueDates = (props) => {
@@ -22,14 +22,25 @@ const DueDates = (props) => {
     };
 
     const handleAddDueDate = (dueDate) => {
+        
         addDueDate(dueDate, (response) => {
             if(response.status){
-                setDueDates(prevDueDates => [...prevDueDates, dueDate])
+                setDueDates(prevDueDates => [dueDate, ...prevDueDates])
             } else {
-                //Handle Error
+                alert(response.message)
             }
 
             setAddDueDateForm(false)
+        })
+    }
+
+    const handleDeleteDueDate = (dueDateId) => {
+        deleteDueDate(dueDateId, (response) => {
+            if(response.status){
+                setDueDates(dueDates.filter(dueDate => dueDate.id != dueDateId))
+            } else {
+                alert(response.message)
+            }
         })
     }
 
@@ -58,7 +69,7 @@ const DueDates = (props) => {
             </IconButton>
 
             {dueDates.map((date, index) => (
-                <DueDateItem key={index} dueDate={date}/>
+                <DueDateItem key={index} dueDate={date} deleteDueDate={(id) => handleDeleteDueDate(id)}/>
             ))}
         </div>
     )
