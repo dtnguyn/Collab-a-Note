@@ -1,4 +1,7 @@
 .dashboard-page-container {
+  height: 94vh;
+
+  overflow-y: auto;
   overflow-x: hidden;
 }
 

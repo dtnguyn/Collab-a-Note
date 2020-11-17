@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CardItem from "./CardItem";
 import "../../styles/DashBoard.css";
 import { Link } from "react-router-dom";
@@ -16,6 +16,8 @@ import {
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 import EditCourseForm from "./EditCourseForm";
+import { useAuth } from "../../context/AuthContext";
+import { getSingleUser } from "../../../controller/auth";
 
 const DashBoardCourses = (props) => {
   const [courses, setCourses] = useContext(CourseContext);
@@ -25,6 +27,9 @@ const DashBoardCourses = (props) => {
   const history = useHistory();
 
   const [addCourseForm, setAddCourseForm] = useState(false);
+
+  const { currentUser } = useAuth();
+  const [customUser, setCustomUser] = useState();
 
   const addCourseIconStyle = {
     margin: 0,
@@ -101,6 +106,18 @@ const DashBoardCourses = (props) => {
     } else callback();
   };
 
+  useEffect(() => {
+    getSingleUser(currentUser.uid, (response) => {
+      if (response.status) {
+        setCustomUser(response.data);
+      } else {
+        alert(response.message);
+      }
+    });
+  }, []);
+
+  if (!customUser) return null;
+
   return (
     <div>
       <h1 className="dashboard-body-title">Courses</h1>
@@ -113,6 +130,7 @@ const DashBoardCourses = (props) => {
         <AddIcon />
       </Fab>
       <AddCourseForm
+        currentUser={customUser}
         formStatus={addCourseForm}
         handleClose={() => setAddCourseForm(false)}
         addCourse={(newCourse) => handleAddCourse(newCourse)}
@@ -137,9 +155,9 @@ const DashBoardCourses = (props) => {
             }}
             openEditForm={() => setFocusCourse(course)}
             deleteCourse={(courseId) => handleDeleteCourse(courseId)}
-            uploadImage={(event, course, callback) =>
-              handleUploadImage(event, course, callback)
-            }
+            uploadImage={(event, currentCourse, callback) => {
+              handleUploadImage(event, currentCourse, callback);
+            }}
           />
         ))}
       </div>

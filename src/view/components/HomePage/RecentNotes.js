@@ -11,9 +11,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import Selection from "../../components/InputSelector";
+import Selection from "../CleanUp/InputSelector";
 import { db } from "../../../controller/api/firebase";
-// import AddNoteForm from "../DashboardPage/AddNoteForm";
 
 class RecentNote extends React.Component {
   constructor(props) {
@@ -30,7 +29,7 @@ class RecentNote extends React.Component {
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.map((doc) => {
-          this.setState({ course_name: doc.data().name });
+          return this.setState({ course_name: doc.data().name });
         });
       });
   }

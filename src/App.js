@@ -1,39 +1,35 @@
 import React from "react";
 import HomePage from "./view/pages/HomePage";
-import AuthPage from "./view/pages/AuthPage"
+import Signup from "./view/components/AuthPage/SignUp";
+import Signin from "./view/components/AuthPage/SignIn/index";
 import NotePage from "./view/pages/NotePage";
 import DashBoardPage from "./view/pages/DashBoardPage";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavigationBar from "./view/components/shared/NavigationBar";
 import CourseDetailPage from "./view/pages/CourseDetailPage";
-
-// import Navigation from './view/components/Navigation';
-// import LandingPage from './view/components/Landing';
-// import SignUpPage from './view/components/SignUp';
-// import SignInPage from './view/components/SignIn';
-// import PasswordForgetPage from './view/components/PasswordForget';
-// import AccountPage from './view/components/Account';
-// import AdminPage from './view/components/Admin';
-
-// import * as ROUTES from './view/constants/routes';
-// import { withAuthentication } from './view/components/Session';
-
+import { AuthProvider } from "./view/context/AuthContext";
+import PrivateRoute from "./view/components/PrivateRoute";
+import ForgotPassword from "./view/components/AuthPage/ForgotPassword";
+import UpdateProfile from "./view/components/AuthPage/UpdateProfile/index";
 
 function App() {
-
   return (
-
-    <Router>
-      <NavigationBar/>
-      <Switch>
-        <Route path="/" exact component={HomePage}/>
-        <Route path="/auth" component={AuthPage}/>
-        <Route path="/note" component={NotePage}/>
-        <Route path="/dashboard" exact component={DashBoardPage}/>
-        <Route path="/dashboard/course" component={CourseDetailPage}/>
-      </Switch>
-    </Router>
-  )
+    <AuthProvider>
+      <Router>
+        <NavigationBar />
+        <Switch>
+          <Route path="/signup" exact component={Signup} />
+          <Route path="/signin" exact component={Signin} />
+          <Route path="/forgot-password" component={ForgotPassword} />
+          <PrivateRoute path="/" exact component={HomePage} />
+          <PrivateRoute path="/dashboard" exact component={DashBoardPage} />
+          <PrivateRoute path="/note" component={NotePage} />
+          <PrivateRoute path="/dashboard/course" component={CourseDetailPage} />
+          <PrivateRoute path="/update-profile" component={UpdateProfile} />
+        </Switch>
+      </Router>
+    </AuthProvider>
+  );
 }
 
 export default App;

@@ -1,6 +1,7 @@
 import { db, storage, apiResponse } from "./api/firebase";
 
 const addCourse = (newCourse, callback) => {
+  console.log(newCourse);
   db.collection("courses")
     .doc(newCourse.id)
     .set(newCourse)
@@ -18,7 +19,7 @@ const addCourse = (newCourse, callback) => {
 
 const getCourses = (ownerId, callback) => {
   db.collection("courses")
-    .where("ownerId", "==", "123123")
+    .where("ownerId", "==", ownerId)
     .get()
     .then(function (querySnapshot) {
       let courses = [];

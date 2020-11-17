@@ -95,7 +95,8 @@ const CardItem = (props) => {
 
           <MenuItem
             onClick={() => {
-              document.getElementById("selectImage").click();
+              //props.setFocusCourse(props.course);
+              document.getElementById(props.course.id).click();
               handleClose();
             }}
           >
@@ -105,7 +106,7 @@ const CardItem = (props) => {
             type="file"
             accept="image/*"
             hidden
-            id="selectImage"
+            id={props.course.id}
             onChange={(event) => {
               setIsLoading(true);
               props.uploadImage(event, props.course, () => {

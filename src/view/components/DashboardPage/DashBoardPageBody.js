@@ -1,19 +1,14 @@
+import React from "react";
+import "../../styles/DashBoard.css";
 
-import React, { useState } from 'react';
-import "../../styles/DashBoard.css"
-
-import DashBoardCourses from './DashBoardCourses';
-
+import DashBoardCourses from "./DashBoardCourses";
 
 const DashBoardPageBody = () => {
+  return (
+    <div className="dashboard-body">
+      <DashBoardCourses />
+    </div>
+  );
+};
 
-
-    return(
-        <div className="dashboard-body">
-            <DashBoardCourses/>
-        </div>
-        
-    )
-}
-
-export default DashBoardPageBody
+export default DashBoardPageBody;

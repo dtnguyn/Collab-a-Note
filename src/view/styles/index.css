@@ -14,21 +14,20 @@ p {
   hyphens: auto;
 }
 
-
-
-
 @font-face {
-  font-family: 'Montserrat-Medium';
-  src: local('FiraSans'), url(../../fonts/Montserrat-Medium.ttf) format('truetype');
+  font-family: "Montserrat-Medium";
+  src: local("FiraSans"),
+    url(../../view/fonts/Montserrat-Medium.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'Montserrat-Bold';
-  src: local('FiraSans'), url(../../fonts/Montserrat-Bold.ttf) format('truetype');
+  font-family: "Montserrat-Bold";
+  src: local("FiraSans"),
+    url(../../view/fonts/Montserrat-Bold.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'Montserrat-Light';
-  src: local('FiraSans'), url(../../fonts/Montserrat-Light.ttf) format('truetype');
+  font-family: "Montserrat-Light";
+  src: local("FiraSans"),
+    url(../../view/fonts/Montserrat-Light.ttf) format("truetype");
 }
-
