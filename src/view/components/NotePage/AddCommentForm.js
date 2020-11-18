@@ -15,12 +15,7 @@ const AddCommentForm = (props) => {
     noteId: props.noteId,
     creationDate: null,
     content: "",
-    author: {
-      id: props.currentUser.id,
-      name: props.currentUser.username,
-      email: props.currentUser.email,
-      avatar: props.currentUser.avatar,
-    },
+    author: props.currentUser,
   });
 
   const createNewCommentId = () => {

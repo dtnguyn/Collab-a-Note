@@ -22,8 +22,7 @@ const Notes = (props) => {
   const [focusNote, setFocusNote] = useState(null);
   const history = useHistory();
 
-  const { currentUser } = useAuth();
-  const [customUser, setCustomUser] = useState();
+  const customUser = props.user;
 
   const addNoteIconStyle = {
     marginRight: "30px",
@@ -87,16 +86,6 @@ const Notes = (props) => {
         setNotes(response.data);
       } else {
         //Handle Error
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    getSingleUser(currentUser.uid, (response) => {
-      if (response.status) {
-        setCustomUser(response.data);
-      } else {
-        alert(response.message);
       }
     });
   }, []);

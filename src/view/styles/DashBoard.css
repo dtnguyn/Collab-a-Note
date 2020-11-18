@@ -30,6 +30,33 @@
 
 /* Body */
 
+/* Invitations */
+
+.invitations-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.invitation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(230, 226, 219);
+  width: 40vw;
+  height: fit-content;
+  padding: 30px;
+  margin: 20px 50px;
+  border-radius: 10px;
+}
+
+.invitation-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 /* Courses */
 
 .dashboard-body-title {

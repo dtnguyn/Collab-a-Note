@@ -58,6 +58,29 @@ const getSingleUser = (userId, callback) => {
     });
 };
 
+const getSingleUserByEmail = (email, callback) => {
+  db.collection("users")
+    .where("email", "==", email)
+    .get()
+    .then(function (querySnapshot) {
+      let users = [];
+      querySnapshot.forEach(function (doc) {
+        var user = doc.data();
+        users.push(user);
+      });
+
+      if (users.length === 1)
+        callback(apiResponse(true, "Getting course sucessfully.", users[0]));
+      else callback(apiResponse(false, "Couldn't find the user", null));
+    })
+    .catch(function (error) {
+      console.error("Error when finding user: ", error);
+      callback(
+        apiResponse(false, "There's some error! Please try again", null)
+      );
+    });
+};
+
 const signin = async (email, password) => {
   await auth.signInWithEmailAndPassword(email, password).catch((error) => {
     console.log("Fail to sign in");
@@ -111,6 +134,7 @@ export {
   signup,
   signin,
   getSingleUser,
+  getSingleUserByEmail,
   signout,
   resetPassword,
   updateEmail,

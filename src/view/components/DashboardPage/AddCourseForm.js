@@ -17,16 +17,13 @@ const AddCourseForm = (props) => {
     ownerId: props.currentUser.id,
     teacher: "",
     courseCode: "",
-    owner: {
-      id: props.currentUser.id,
-      name: props.currentUser.username,
-      email: props.currentUser.email,
-      avatar: props.currentUser.avatar,
-    },
+    owner: props.currentUser,
     creationDate: "",
     lastUpdate: "",
     coverImg:
       "https://i.pinimg.com/originals/be/96/a1/be96a12fe9f5fd8eaae8518455b4b6a3.png",
+    accessUsers: [props.currentUser.id],
+    accessUsersObj: [props.currentUser],
   });
 
   const getCurrentTime = () => {
