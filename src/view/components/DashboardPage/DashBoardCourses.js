@@ -9,6 +9,7 @@ import { CourseContext } from "../../context/CourseContext";
 import AddCourseForm from "./AddCourseForm";
 import {
   addCourse,
+  addUserToCourse,
   deleteCourse,
   updateCourse,
   uploadCoverImage,
@@ -18,9 +19,12 @@ import moment from "moment";
 import EditCourseForm from "./EditCourseForm";
 import { useAuth } from "../../context/AuthContext";
 import { getSingleUser } from "../../../controller/auth";
+import { getCourseInvitations } from "../../../controller/course";
+import Invitation from "./Invitation";
 
 const DashBoardCourses = (props) => {
   const [courses, setCourses] = useContext(CourseContext);
+  const [invitations, setInvitations] = useState([]);
 
   const [focusCourse, setFocusCourse] = useState(null);
 
@@ -106,10 +110,33 @@ const DashBoardCourses = (props) => {
     } else callback();
   };
 
+  const handleAcceptInvite = (invitation) => {
+    addUserToCourse(customUser, invitation, (response) => {
+      if (response.status) {
+        setInvitations(
+          invitations.filter((invite) => invite.id != invitation.id)
+        );
+        setCourses([...courses, invitation.course]);
+      } else {
+        alert(response.message);
+      }
+    });
+  };
+
   useEffect(() => {
     getSingleUser(currentUser.uid, (response) => {
       if (response.status) {
         setCustomUser(response.data);
+      } else {
+        alert(response.message);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    getCourseInvitations(currentUser.email, (response) => {
+      if (response.status) {
+        setInvitations(response.data);
       } else {
         alert(response.message);
       }
@@ -121,6 +148,14 @@ const DashBoardCourses = (props) => {
   return (
     <div>
       <h1 className="dashboard-body-title">Courses</h1>
+      <div className="invitations-container">
+        {invitations.map((invitation) => (
+          <Invitation
+            invite={invitation}
+            onAcceptClick={() => handleAcceptInvite(invitation)}
+          />
+        ))}
+      </div>
       <Fab
         color="primary"
         aria-label="add"
@@ -158,6 +193,7 @@ const DashBoardCourses = (props) => {
             uploadImage={(event, currentCourse, callback) => {
               handleUploadImage(event, currentCourse, callback);
             }}
+            isOwner={customUser.id === course.owner.id}
           />
         ))}
       </div>

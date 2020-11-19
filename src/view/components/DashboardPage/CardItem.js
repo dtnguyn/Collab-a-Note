@@ -24,18 +24,6 @@ const CardItem = (props) => {
   };
 
   return (
-    // <div className="card-item-container"
-    //     onClick={props.onClick}
-    // >
-    //     <img
-    //         className="card-item-image"
-    //         src={props.imgUrl}/>
-    //     <h3 className="card-item-title">{props.title}</h3>
-    //     <p className="card-item-subtitle">{props.subtitleOne}</p>
-    //     <p className="card-item-subtitle">{props.subtitleTwo}</p>
-    //     <p className="card-item-subtitle">{props.subtitleThree}</p>
-    // </div>
-
     <Card className="card-item-container">
       <div onClick={props.onClick}>
         <div className="card-item-image-container">
@@ -61,64 +49,65 @@ const CardItem = (props) => {
           </Card.Subtitle>
         </Card.Body>
       </div>
-
-      <div className="card-item-menu">
-        <IconButton
-          aria-label="more"
-          aria-controls="long-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          <MoreVertIcon />
-        </IconButton>
-        <Menu
-          id="long-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={open}
-          onClose={handleClose}
-          PaperProps={{
-            style: {
-              maxHeight: ITEM_HEIGHT * 4.5,
-              width: "20ch",
-            },
-          }}
-        >
-          <MenuItem
-            onClick={() => {
-              props.openEditForm();
-              handleClose();
+      {props.isOwner ? (
+        <div className="card-item-menu">
+          <IconButton
+            aria-label="more"
+            aria-controls="long-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+            id="long-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={open}
+            onClose={handleClose}
+            PaperProps={{
+              style: {
+                maxHeight: ITEM_HEIGHT * 4.5,
+                width: "20ch",
+              },
             }}
           >
-            Edit
-          </MenuItem>
+            <MenuItem
+              onClick={() => {
+                props.openEditForm();
+                handleClose();
+              }}
+            >
+              Edit
+            </MenuItem>
 
-          <MenuItem
-            onClick={() => {
-              //props.setFocusCourse(props.course);
-              document.getElementById(props.course.id).click();
-              handleClose();
-            }}
-          >
-            Change cover image
-          </MenuItem>
-          <input
-            type="file"
-            accept="image/*"
-            hidden
-            id={props.course.id}
-            onChange={(event) => {
-              setIsLoading(true);
-              props.uploadImage(event, props.course, () => {
-                setIsLoading(false);
-              });
-            }}
-          />
-          <MenuItem onClick={() => props.deleteCourse(props.course.id)}>
-            Delete
-          </MenuItem>
-        </Menu>
-      </div>
+            <MenuItem
+              onClick={() => {
+                //props.setFocusCourse(props.course);
+                document.getElementById(props.course.id).click();
+                handleClose();
+              }}
+            >
+              Change cover image
+            </MenuItem>
+            <input
+              type="file"
+              accept="image/*"
+              hidden
+              id={props.course.id}
+              onChange={(event) => {
+                setIsLoading(true);
+                props.uploadImage(event, props.course, () => {
+                  setIsLoading(false);
+                });
+              }}
+            />
+            <MenuItem onClick={() => props.deleteCourse(props.course.id)}>
+              Delete
+            </MenuItem>
+          </Menu>
+        </div>
+      ) : null}
     </Card>
   );
 };
