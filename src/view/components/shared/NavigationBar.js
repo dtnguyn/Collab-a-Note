@@ -39,19 +39,7 @@ const NavigationBar = () => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
-          <NavDropdown title="DashBoard" id="collasible-nav-dropdown" href="">
-            <NavDropdown.Item href="dashboard/course/1">
-              Course 1
-            </NavDropdown.Item>
-            <NavDropdown.Item href="dashboard/course/2">
-              Course 2
-            </NavDropdown.Item>
-            <NavDropdown.Item href="dashboard/course/3">
-              Course 3
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="/dashboard">View all</NavDropdown.Item>
-          </NavDropdown>
+          <Nav.Link href="/dashboard">DashBoard</Nav.Link>
         </Nav>
         <Nav>
           <Nav.Link onClick={() => handleSignout()}>Logout</Nav.Link>
