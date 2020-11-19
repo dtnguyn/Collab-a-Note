@@ -28,9 +28,9 @@ const Notes = (props) => {
     marginRight: "30px",
     width: "50px",
     height: "50px",
-    top: "0",
-    right: "0",
-    bottom: 0,
+    top: "20px",
+    right: "10px",
+    bottom: "0",
     left: "auto",
     position: "absolute",
   };

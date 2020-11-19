@@ -188,4 +188,5 @@ export {
   addUserToCourse,
   addCourseInvitations,
   getCourseInvitations,
+  deleteCourseInvitation,
 };

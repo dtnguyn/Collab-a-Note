@@ -96,7 +96,13 @@ const AddUsersForm = (props) => {
         </div>
 
         {users.map((user) => (
-          <UserItem user={user} />
+          <UserItem
+            user={user}
+            removeOnClick={({ id, email }) => {
+              setUsers(users.filter((user) => user.id != id));
+              setInvitions(invitations.filter((invite) => invite.to != email));
+            }}
+          />
         ))}
       </DialogContent>
 

@@ -81,53 +81,61 @@ const getSingleUserByEmail = (email, callback) => {
     });
 };
 
-const signin = async (email, password) => {
-  await auth.signInWithEmailAndPassword(email, password).catch((error) => {
-    console.log("Fail to sign in");
+const signin = async (email, password, callback) => {
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+    return apiResponse(true, "Sign in sucessfully.", null);
+  } catch (error) {
     return apiResponse(false, "Fail to sign in.", null);
-  });
-  return apiResponse(true, "Sign in sucessfully.", null);
+  }
 };
 
 const signout = async () => {
-  await auth.signOut().catch((error) => {
+  try {
+    await auth.signOut();
+    return apiResponse(true, "Sign out sucessfully.", null);
+  } catch (error) {
     return apiResponse(false, "Fail to sign out.", null);
-  });
-
-  return apiResponse(true, "Sign out sucessfully.", null);
+  }
 };
 
 const resetPassword = async (email) => {
-  await auth.sendPasswordResetEmail(email).catch((error) => {
+  try {
+    await auth.sendPasswordResetEmail(email);
+    return apiResponse(
+      true,
+      "Check email for changing password instructions.",
+      null
+    );
+  } catch (error) {
     return apiResponse(false, "There's an error! Please try again.", null);
-  });
-  return apiResponse(
-    true,
-    "Check email for changing password instructions.",
-    null
-  );
+  }
 };
 
 const updateEmail = async (currentUser, email) => {
-  await currentUser.updateEmail(email).catch(() => {
+  try {
+    await currentUser.updateEmail(email);
+    return apiResponse(
+      true,
+      "Check email for changing email instructions.",
+      null
+    );
+  } catch (error) {
     return apiResponse(false, "There's an error! Please try again.", null);
-  });
-  return apiResponse(
-    true,
-    "Check email for changing email instructions.",
-    null
-  );
+  }
 };
 
 const updatePassword = async (currentUser, password) => {
-  await currentUser.updatePassword(password).catch((error) => {
+  try {
+    await currentUser.updatePassword(password);
+    return apiResponse(
+      true,
+      "Check email for changing password instructions.",
+      null
+    );
+  } catch (error) {
     return apiResponse(false, "There's an error! Please try again.", null);
-  });
-  return apiResponse(
-    true,
-    "Check email for changing password instructions.",
-    null
-  );
+  }
 };
 
 export {

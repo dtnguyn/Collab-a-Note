@@ -13,6 +13,7 @@ import {
   deleteCourse,
   updateCourse,
   uploadCoverImage,
+  deleteCourseInvitation,
 } from "../../../controller/course";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
@@ -123,6 +124,18 @@ const DashBoardCourses = (props) => {
     });
   };
 
+  const handleDenyInvite = (invitation) => {
+    deleteCourseInvitation(invitation.id, (response) => {
+      if (response.status) {
+        setInvitations(
+          invitations.filter((invite) => invite.id != invitation.id)
+        );
+      } else {
+        alert(response.message);
+      }
+    });
+  };
+
   useEffect(() => {
     getSingleUser(currentUser.uid, (response) => {
       if (response.status) {
@@ -153,6 +166,7 @@ const DashBoardCourses = (props) => {
           <Invitation
             invite={invitation}
             onAcceptClick={() => handleAcceptInvite(invitation)}
+            onDenyClick={() => handleDenyInvite(invitation)}
           />
         ))}
       </div>

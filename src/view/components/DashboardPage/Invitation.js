@@ -20,7 +20,11 @@ const Invitation = (props) => {
         >
           Accept
         </Button>
-        <Button style={buttonStyle} color="secondary">
+        <Button
+          style={buttonStyle}
+          color="secondary"
+          onClick={props.onDenyClick}
+        >
           Deny
         </Button>
       </div>

@@ -11,7 +11,7 @@ const UserItem = (props) => {
         <h4 className="user-item-name">{props.user.username}</h4>
         <h4 className="user-item-email">{props.user.email}</h4>
       </div>
-      <IconButton>
+      <IconButton onClick={() => props.removeOnClick(props.user)}>
         <Delete />
       </IconButton>
     </div>

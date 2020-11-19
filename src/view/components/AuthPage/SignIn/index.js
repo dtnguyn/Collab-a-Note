@@ -30,6 +30,7 @@ export default function Signin() {
         if (response.status) {
           history.push("/");
         } else {
+          console.log("here");
           setError(response.message);
         }
       }
