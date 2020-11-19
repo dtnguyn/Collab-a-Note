@@ -4,6 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import { signin } from "../../../../controller/auth";
 import { useAuth } from "../../../context/AuthContext";
 
+import "../../../styles/Auth.css";
+
 export default function Signin() {
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -39,7 +41,7 @@ export default function Signin() {
 
   return (
     <Container
-      className="d-flex align-items-center justify-content-center"
+      className="d-flex align-items-center justify-content-center auth-page"
       style={{ minheight: "100vh" }}
     >
       <div className="w-100" style={{ maxWidth: "400px" }}>
