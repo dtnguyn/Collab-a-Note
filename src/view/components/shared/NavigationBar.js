@@ -45,13 +45,11 @@ const NavigationBar = () => {
           <Nav.Link href="/dashboard">DashBoard</Nav.Link>
         </Nav>
         <Nav>
-          (
           {currentUser ? (
             <Nav.Link onClick={() => handleSignout()}>Logout</Nav.Link>
           ) : (
             <Nav.Link onClick={() => handleSignout()}>Sign in</Nav.Link>
           )}
-          )
         </Nav>
       </Navbar.Collapse>
     </Navbar>
