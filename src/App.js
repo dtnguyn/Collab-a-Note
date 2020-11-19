@@ -11,6 +11,7 @@ import { AuthProvider } from "./view/context/AuthContext";
 import PrivateRoute from "./view/components/PrivateRoute";
 import ForgotPassword from "./view/components/AuthPage/ForgotPassword";
 import UpdateProfile from "./view/components/AuthPage/UpdateProfile/index";
+import AboutPage from "./view/pages/AboutPage";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
           <Route path="/signup" exact component={Signup} />
           <Route path="/signin" exact component={Signin} />
           <Route path="/forgot-password" component={ForgotPassword} />
-          <PrivateRoute path="/" exact component={HomePage} />
+          <Route path="/" exact component={AboutPage} />
+          <PrivateRoute path="/home" exact component={HomePage} />
           <PrivateRoute path="/dashboard" exact component={DashBoardPage} />
           <PrivateRoute path="/note" component={NotePage} />
           <PrivateRoute path="/dashboard/course" component={CourseDetailPage} />

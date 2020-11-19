@@ -30,7 +30,7 @@ export default function Signin() {
     signin(emailRef.current.value, passwordRef.current.value).then(
       (response) => {
         if (response.status) {
-          history.push("/");
+          history.push("/home");
         } else {
           console.log("here");
           setError(response.message);

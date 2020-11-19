@@ -93,7 +93,7 @@
   filter: brightness(70%);
 }
 
-.card-item-title {
+.card .card-item-title {
   font-size: 2rem;
 }
 

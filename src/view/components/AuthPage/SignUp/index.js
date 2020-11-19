@@ -35,7 +35,7 @@ export default function Signup() {
       (response) => {
         setLoading(false);
         if (response.status) {
-          history.push("/");
+          history.push("/home");
         } else {
           setError(response.message);
         }
