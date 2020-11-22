@@ -11,7 +11,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import Selection from "../CleanUp/InputSelector";
 import { db } from "../../../controller/api/firebase";
 
 class RecentNote extends React.Component {
@@ -125,9 +124,7 @@ export default function NewNoteDialog() {
             value="20"
             fullWidth
             select
-          >
-            <Selection collection={"courses"} />
-          </TextField>
+          ></TextField>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

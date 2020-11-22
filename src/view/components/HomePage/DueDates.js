@@ -11,7 +11,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Selection from "../CleanUp/InputSelector";
 
 import { db } from "../../../controller/api/firebase";
 
@@ -136,9 +135,7 @@ export default function NewDueDateDialog() {
                 shrink: true,
               },
             }}
-          >
-            <Selection collection={"courses"} />
-          </TextField>
+          ></TextField>
           <TextField
             id="deadline-input"
             type="datetime-local"

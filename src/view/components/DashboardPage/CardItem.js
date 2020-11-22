@@ -23,6 +23,8 @@ const CardItem = (props) => {
     setAnchorEl(null);
   };
 
+  if (!props.course) return null;
+
   return (
     <Card className="card-item-container">
       <div onClick={props.onClick}>

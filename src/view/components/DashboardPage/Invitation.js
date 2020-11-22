@@ -6,9 +6,11 @@ const Invitation = (props) => {
     margin: "10px 20px 0",
   };
 
+  if (!props.invite) return null;
+
   return (
     <div className="invitation-container">
-      <h4>
+      <h4 data-testid="invite-text">
         {props.invite.from.username} invites you to {props.invite.course.name}{" "}
         course
       </h4>
@@ -17,6 +19,7 @@ const Invitation = (props) => {
           style={buttonStyle}
           onClick={props.onAcceptClick}
           color="primary"
+          data-testid="accept-button"
         >
           Accept
         </Button>
@@ -24,6 +27,7 @@ const Invitation = (props) => {
           style={buttonStyle}
           color="secondary"
           onClick={props.onDenyClick}
+          data-testid="deny-button"
         >
           Deny
         </Button>

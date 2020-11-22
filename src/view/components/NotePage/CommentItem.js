@@ -10,6 +10,7 @@ const CommentItem = (props) => {
     margin: "5px",
   };
 
+  if (!props.comment) return null;
   return (
     <div className="row">
       <div className="col-lg-1 col-md-0">
@@ -18,11 +19,18 @@ const CommentItem = (props) => {
 
       <div className="col-lg-11 col-md-12">
         <div className="comment-content-container">
-          <p className="comment-username">{props.comment.author.username}</p>
-          <p className="comment-creation-date">
+          <p data-testid="comment-username" className="comment-username">
+            {props.comment.author.username}
+          </p>
+          <p
+            data-testid="comment-creation-date"
+            className="comment-creation-date"
+          >
             {props.comment.creationDate.toLocaleDateString("en-US")}
           </p>
-          <p className="comment-content">{props.comment.content}</p>
+          <p data-testid="comment-content" className="comment-content">
+            {props.comment.content}
+          </p>
           <div className="comment-buttons">
             <IconButton
               onClick={() => {
