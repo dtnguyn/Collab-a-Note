@@ -2,12 +2,12 @@ import React, { useState, createContext } from "react";
 
 export const NoteContext = createContext();
 
-export const CourseProvider = (props) => {
-  const [courses, setCourses] = useState([]);
+export const NoteProvider = (props) => {
+  const [notes, setNotes] = useState([]);
 
   return (
-    <CourseContext.Provider value={[courses, setCourses]}>
+    <NoteContext.Provider value={[notes, setNotes]}>
       {props.children}
-    </CourseContext.Provider>
+    </NoteContext.Provider>
   );
 };
