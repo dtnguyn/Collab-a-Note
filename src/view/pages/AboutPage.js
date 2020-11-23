@@ -38,7 +38,7 @@ const AboutPage = () => {
           <div className="col-md-6 col-sm-12">
             <Member
               member={{
-                coverImg: "",
+                coverImg: "sam_profile_image.jpg",
                 name: "Samuel Batrug",
                 role: "Product Manager",
               }}
