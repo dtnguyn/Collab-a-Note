@@ -11,7 +11,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Selection from "../CleanUp/InputSelector";
 
 import { db } from "../../../controller/api/firebase";
 import { useAuth } from "../../context/AuthContext";

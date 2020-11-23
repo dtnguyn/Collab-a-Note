@@ -4,6 +4,7 @@ import React from "react";
 import UserImage from "../shared/UserImage";
 
 const UserItem = (props) => {
+  if (!props.user) return null;
   return (
     <div className="user-item-container">
       <UserImage imgUrl={props.user.avatar} />

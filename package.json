@@ -20,6 +20,7 @@
     "immutable": "^4.0.0-rc.12",
     "mitt": "^2.1.0",
     "moment": "^2.29.1",
+    "pretty": "^2.0.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.13.1",
@@ -52,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.2.0"
   }
 }
