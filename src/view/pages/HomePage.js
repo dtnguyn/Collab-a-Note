@@ -7,22 +7,25 @@ import DueDatesHomePage from "../components/HomePage/DueDates";
 import RecentNotesHomePage from "../components/HomePage/RecentNotes";
 import { CourseProvider } from "../context/CourseContext";
 import { DueDateProvider } from "../context/DueDateContext";
+import { NoteProvider } from "../context/NotesContext";
 
 const HomePage = () => {
   return (
     <CourseProvider>
       <DueDateProvider>
-        <div className="main-page">
-          <CourseListHomePage className="courseList"></CourseListHomePage>
-          <Row>
-            <Col>
-              <RecentNotesHomePage />
-            </Col>
-            <Col>
-              <DueDatesHomePage />
-            </Col>
-          </Row>
-        </div>
+        <NoteProvider>
+          <div className="main-page">
+            <CourseListHomePage className="courseList"></CourseListHomePage>
+            <Row>
+              <Col>
+                <RecentNotesHomePage />
+              </Col>
+              <Col>
+                <DueDatesHomePage />
+              </Col>
+            </Row>
+          </div>
+        </NoteProvider>
       </DueDateProvider>
     </CourseProvider>
   );
