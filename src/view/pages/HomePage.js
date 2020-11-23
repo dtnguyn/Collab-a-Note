@@ -5,20 +5,26 @@ import "../styles/HomePage.css";
 import CourseListHomePage from "../components/HomePage/Courses";
 import DueDatesHomePage from "../components/HomePage/DueDates";
 import RecentNotesHomePage from "../components/HomePage/RecentNotes";
+import { CourseProvider } from "../context/CourseContext";
+import { DueDateProvider } from "../context/DueDateContext";
 
 const HomePage = () => {
   return (
-    <div className="main-page">
-      <CourseListHomePage className="courseList"></CourseListHomePage>
-      <Row>
-        <Col>
-          <RecentNotesHomePage />
-        </Col>
-        <Col>
-          <DueDatesHomePage />
-        </Col>
-      </Row>
-    </div>
+    <CourseProvider>
+      <DueDateProvider>
+        <div className="main-page">
+          <CourseListHomePage className="courseList"></CourseListHomePage>
+          <Row>
+            <Col>
+              <RecentNotesHomePage />
+            </Col>
+            <Col>
+              <DueDatesHomePage />
+            </Col>
+          </Row>
+        </div>
+      </DueDateProvider>
+    </CourseProvider>
   );
 };
 

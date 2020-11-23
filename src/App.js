@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavigationBar from "./view/components/shared/NavigationBar";
 import CourseDetailPage from "./view/pages/CourseDetailPage";
 import { AuthProvider } from "./view/context/AuthContext";
-import PrivateRoute from "./view/components/PrivateRoute";
+import PrivateRoute from "./view/components/PrivateRoute/index";
 import ForgotPassword from "./view/components/AuthPage/ForgotPassword";
 import UpdateProfile from "./view/components/AuthPage/UpdateProfile/index";
 import AboutPage from "./view/pages/AboutPage";
