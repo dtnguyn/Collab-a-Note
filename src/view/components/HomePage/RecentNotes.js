@@ -39,9 +39,7 @@ class RecentNote extends React.Component {
     return (
       <div className="recent-notes-list" onClick={() => alert("route to note")}>
         <h2>{this.props.title}</h2>
-        <h4 onClick={() => alert("route to course")}>
-          {this.state.course_name}
-        </h4>
+        <h4>{this.state.course_name}</h4>
         <h6>{date}</h6>
       </div>
     );
