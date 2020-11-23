@@ -38,7 +38,7 @@ const AboutPage = () => {
           <div className="col-md-6 col-sm-12">
             <Member
               member={{
-                coverImg: "",
+                coverImg: "sam_profile_image.jpg",
                 name: "Samuel Batrug",
                 role: "Product Manager",
               }}
@@ -60,7 +60,7 @@ const AboutPage = () => {
           <div className="col-md-4 col-sm-12">
             <Member
               member={{
-                coverImg: "",
+                coverImg: "Steven_Profile_Image.jpg",
                 name: "Steven Smith",
                 role: "Engineer",
               }}
