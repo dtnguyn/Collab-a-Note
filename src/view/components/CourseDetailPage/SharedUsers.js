@@ -18,6 +18,7 @@ const SharedUsers = (props) => {
       if (response.status) {
         callback(response.data);
       } else {
+        callback(null);
         alert(response.message);
       }
     });
@@ -34,7 +35,7 @@ const SharedUsers = (props) => {
       <h1 className="detail-subtitle">Shared with</h1>
       <div className="shared-list">
         {props.course.accessUsersObj.map((user) => (
-          <UserImage className="user-image-item" imgUrl={user.avatar} />
+          <UserImage imgUrl={user.avatar} />
         ))}
         <IconButton onClick={() => setAddUsersForm(true)}>
           <AddIcon />

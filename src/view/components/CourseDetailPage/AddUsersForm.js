@@ -76,6 +76,8 @@ const AddUsersForm = (props) => {
                   if (checkDuplicateUser(searchText)) return;
                   setIsSearching(true);
                   props.findUser(searchText, (user) => {
+                    setIsSearching(false);
+                    if (!user) return;
                     setUsers([...users, user]);
                     setInvitions([
                       ...invitations,
@@ -85,7 +87,6 @@ const AddUsersForm = (props) => {
                         to: user.email,
                       },
                     ]);
-                    setIsSearching(false);
                   });
                 }}
               >

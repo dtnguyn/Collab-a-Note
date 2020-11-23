@@ -40,7 +40,7 @@ const Notes = (props) => {
       if (response.status) {
         setNotes((previousNotes) => [newNote, ...previousNotes]);
       } else {
-        //Handle Error
+        alert(response.message);
       }
       setAddNoteForm(false);
     });
@@ -63,7 +63,11 @@ const Notes = (props) => {
         setNotes(
           notes.map((note) => {
             if (note.id === updatedNote.id) {
-              return { ...note, title: updatedNote.title };
+              return {
+                ...note,
+                title: updatedNote.title,
+                lastUpdate: updatedNote.lastUpdate,
+              };
             }
             return note;
           })

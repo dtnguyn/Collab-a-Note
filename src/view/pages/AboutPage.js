@@ -16,7 +16,7 @@ const AboutPage = () => {
             <span class="header-sub">Taking notes to the next level</span>
           </h1>
 
-          <a href="/signin" class="btn btn-white">
+          <a href="/dashboard" class="btn btn-white">
             JOIN US
           </a>
         </div>
@@ -60,7 +60,7 @@ const AboutPage = () => {
           <div className="col-md-4 col-sm-12">
             <Member
               member={{
-                coverImg: "",
+                coverImg: "Steven_Profile.jpg",
                 name: "Steven Smith",
                 role: "Engineer",
               }}
