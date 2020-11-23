@@ -95,7 +95,16 @@
 .note-item-container {
   cursor: pointer;
   position: relative;
-  border-radius: 15px;
+  border-radius: 5px;
+}
+
+.note-item-title {
+  margin-bottom: 20px;
+  font-family: Montserrat-Bold;
+}
+
+.note-item-sub {
+  line-height: 10px;
 }
 
 /* dueDates section */

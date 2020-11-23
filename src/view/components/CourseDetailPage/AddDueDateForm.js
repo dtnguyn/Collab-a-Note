@@ -9,18 +9,15 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { v4 as uuidv4 } from "uuid";
 import { database } from "firebase";
+import { CircularProgress } from "@material-ui/core";
 
 const AddDueDateForm = (props) => {
   const [newDueDate, setNewDueDate] = useState({
     id: "",
     title: "",
     courseId: props.course.id,
-    deadline: Date(),
+    deadline: null,
   });
-
-  const getCurrentTime = () => {
-    return new Date();
-  };
 
   const createNewDueDateId = () => {
     const id = uuidv4();
@@ -51,6 +48,8 @@ const AddDueDateForm = (props) => {
         open={props.formStatus}
         onClose={props.handleClose}
         aria-labelledby="form-dialog-title"
+        fullWidth={true}
+        maxWidth={"md"}
       >
         <DialogTitle id="form-dialog-title">Add Due Date</DialogTitle>
         <DialogContent>
@@ -84,19 +83,25 @@ const AddDueDateForm = (props) => {
           <Button onClick={props.handleClose} color="primary">
             Cancel
           </Button>
-          <Button
-            onClick={() => {
-              const id = createNewDueDateId();
 
-              props.addDueDate({
-                ...newDueDate,
-                id,
-              });
-            }}
-            color="primary"
-          >
-            Add
-          </Button>
+          {props.isAdding ? (
+            <CircularProgress />
+          ) : (
+            <Button
+              disabled={newDueDate.title === "" || !newDueDate.deadline}
+              onClick={() => {
+                const id = createNewDueDateId();
+
+                props.addDueDate({
+                  ...newDueDate,
+                  id,
+                });
+              }}
+              color="primary"
+            >
+              Add
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
     </div>

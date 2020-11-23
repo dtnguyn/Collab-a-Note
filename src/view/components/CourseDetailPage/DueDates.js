@@ -12,6 +12,7 @@ import DueDateItem from "./DueDateItem";
 const DueDates = (props) => {
   const [dueDates, setDueDates] = useState([]);
   const [addDueDateForm, setAddDueDateForm] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
   const addDueDateIconStyle = {
     marginRight: "30px",
@@ -25,7 +26,9 @@ const DueDates = (props) => {
   };
 
   const handleAddDueDate = (dueDate) => {
+    setIsAdding(true);
     addDueDate(dueDate, (response) => {
+      setIsAdding(false);
       if (response.status) {
         setDueDates((prevDueDates) => [dueDate, ...prevDueDates]);
       } else {
@@ -60,6 +63,7 @@ const DueDates = (props) => {
     <div className="due-dates-container">
       <h1 className="detail-subtitle">Due dates</h1>
       <AddDueDateForm
+        isAdding={isAdding}
         course={props.course}
         handleClose={() => setAddDueDateForm(false)}
         formStatus={addDueDateForm}
@@ -74,6 +78,7 @@ const DueDates = (props) => {
 
       {dueDates.map((date, index) => (
         <DueDateItem
+          isOwner={true}
           key={index}
           dueDate={date}
           deleteDueDate={(id) => handleDeleteDueDate(id)}

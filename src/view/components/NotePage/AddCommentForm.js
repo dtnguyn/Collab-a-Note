@@ -8,6 +8,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { v4 as uuidv4 } from "uuid";
 import { Form } from "react-bootstrap";
+import { CircularProgress } from "@material-ui/core";
 
 const AddCommentForm = (props) => {
   const [comment, setComment] = useState({
@@ -40,19 +41,12 @@ const AddCommentForm = (props) => {
       open={props.formStatus}
       onClose={props.handleClose}
       aria-labelledby="form-dialog-title"
+      fullWidth={true}
+      maxWidth={"md"}
     >
       <DialogTitle id="form-dialog-title">Add Comment</DialogTitle>
       <DialogContent>
         <DialogContentText>Type your comment to this note.</DialogContentText>
-        {/* <TextareaAutosize
-                autoFocus
-                margin="dense"
-                id="name"
-                label="Comment"
-                type="text"
-                fullWidth
-                onChange={(e) => {handleCommentChange(e)}}
-            /> */}
         <Form.Control
           onChange={(e) => {
             handleCommentChange(e);
@@ -65,22 +59,27 @@ const AddCommentForm = (props) => {
         <Button onClick={props.handleClose} color="primary">
           Cancel
         </Button>
-        <Button
-          disabled={comment.content.length === 0}
-          onClick={() => {
-            const id = createNewCommentId();
-            const creationDate = getCurrentTime();
 
-            props.addComment({
-              ...comment,
-              id,
-              creationDate,
-            });
-          }}
-          color="primary"
-        >
-          Add
-        </Button>
+        {props.isAdding ? (
+          <CircularProgress />
+        ) : (
+          <Button
+            disabled={comment.content.length === 0}
+            onClick={() => {
+              const id = createNewCommentId();
+              const creationDate = getCurrentTime();
+
+              props.addComment({
+                ...comment,
+                id,
+                creationDate,
+              });
+            }}
+            color="primary"
+          >
+            Add
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );
