@@ -21,7 +21,6 @@ import { CourseContext } from "../../context/CourseContext";
 import AddCourseForm from "../DashboardPage/AddCourseForm";
 import CardItem from "../DashboardPage/CardItem";
 
-
 const CourseListHomePage = (props) => {
   const { currentUser } = useAuth();
   const [courses, setCourses] = useContext(CourseContext);
@@ -87,6 +86,16 @@ const CourseListHomePage = (props) => {
       setAddCourseForm(false);
     });
   };
+
+  useEffect(() => {
+    getCourses(currentUser.uid, (response) => {
+      if (response.status) {
+        setCourses(response.data);
+      } else {
+        alert(response.message);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     getSingleUser(currentUser.uid, (response) => {
