@@ -7,7 +7,7 @@ const AboutPage = () => {
     <div className="about-container">
       <div class="header">
         <div class="logo-box">
-          <img src="img/logo-white.png" alt="Logo" class="logo    " />
+          <img src="Collab-a-Note Logo.png" alt="Logo" class="logo    " />
         </div>
 
         <div class="text-box">
