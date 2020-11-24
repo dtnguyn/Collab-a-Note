@@ -36,6 +36,8 @@ const DashBoardCourses = (props) => {
   const { currentUser } = useAuth();
   const [customUser, setCustomUser] = useState();
 
+  const [isAdding, setIsAdding] = useState(false);
+
   const addCourseIconStyle = {
     margin: 0,
     width: "80px",
@@ -52,7 +54,9 @@ const DashBoardCourses = (props) => {
   };
 
   const handleAddCourse = (newCourse) => {
+    setIsAdding(true);
     addCourse(newCourse, (response) => {
+      setIsAdding(false);
       if (response.status) {
         setCourses((prevCourse) => [...prevCourse, newCourse]);
       } else {
@@ -73,7 +77,9 @@ const DashBoardCourses = (props) => {
   };
 
   const handleUpdateCourse = (updatedCourse) => {
+    setIsAdding(true);
     updateCourse(updatedCourse, (response) => {
+      setIsAdding(false);
       setFocusCourse(null);
       if (response.status) {
         setCourses(
@@ -179,6 +185,7 @@ const DashBoardCourses = (props) => {
         <AddIcon />
       </Fab>
       <AddCourseForm
+        isAdding={isAdding}
         currentUser={customUser}
         formStatus={addCourseForm}
         handleClose={() => setAddCourseForm(false)}
@@ -187,6 +194,7 @@ const DashBoardCourses = (props) => {
 
       {focusCourse != null ? (
         <EditCourseForm
+          isEditing={isAdding}
           course={focusCourse}
           handleClose={() => setFocusCourse(null)}
           updateCourse={(updatedCourse) => handleUpdateCourse(updatedCourse)}

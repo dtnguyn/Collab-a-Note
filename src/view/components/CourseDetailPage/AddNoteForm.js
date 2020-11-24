@@ -9,12 +9,13 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../../context/AuthContext";
+import { CircularProgress } from "@material-ui/core";
 
 const AddNoteForm = (props) => {
   const [newNote, setNewNote] = useState({
     id: "",
     courseId: props.course.id,
-    title: "Untitled",
+    title: "",
     content: "Your note goes here...",
     ownerId: props.currentUser.id,
     owner: props.currentUser,
@@ -45,8 +46,10 @@ const AddNoteForm = (props) => {
         open={props.formStatus}
         onClose={props.handleClose}
         aria-labelledby="form-dialog-title"
+        fullWidth={true}
+        maxWidth={"md"}
       >
-        <DialogTitle id="form-dialog-title">Add Note</DialogTitle>
+        <DialogTitle id="form-dialog-title"> Add Note</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Add note to your {props.course.name} course.
@@ -65,23 +68,28 @@ const AddNoteForm = (props) => {
           <Button onClick={props.handleClose} color="primary">
             Cancel
           </Button>
-          <Button
-            onClick={() => {
-              const id = createNewNoteId();
-              const creationDate = getCurrentTime();
-              const lastUpdate = getCurrentTime();
+          {props.isAdding ? (
+            <CircularProgress />
+          ) : (
+            <Button
+              disabled={newNote.title == ""}
+              onClick={() => {
+                const id = createNewNoteId();
+                const creationDate = getCurrentTime();
+                const lastUpdate = getCurrentTime();
 
-              props.addNote({
-                ...newNote,
-                id,
-                creationDate,
-                lastUpdate,
-              });
-            }}
-            color="primary"
-          >
-            Add
-          </Button>
+                props.addNote({
+                  ...newNote,
+                  id,
+                  creationDate,
+                  lastUpdate,
+                });
+              }}
+              color="primary"
+            >
+              Add
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
     </div>

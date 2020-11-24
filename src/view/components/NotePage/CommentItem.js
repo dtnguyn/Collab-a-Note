@@ -32,14 +32,16 @@ const CommentItem = (props) => {
             {props.comment.content}
           </p>
           <div className="comment-buttons">
-            <IconButton
-              onClick={() => {
-                props.onClickDelete(props.comment.id);
-              }}
-              style={deleteButtonStyle}
-            >
-              <Delete />
-            </IconButton>
+            {props.isOwner ? (
+              <IconButton
+                onClick={() => {
+                  props.onClickDelete(props.comment.id);
+                }}
+                style={deleteButtonStyle}
+              >
+                <Delete />
+              </IconButton>
+            ) : null}
           </div>
         </div>
       </div>

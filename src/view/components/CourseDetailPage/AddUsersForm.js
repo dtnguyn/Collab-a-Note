@@ -22,7 +22,7 @@ const AddUsersForm = (props) => {
   };
 
   const [users, setUsers] = useState([]);
-  const [invitations, setInvitions] = useState([]);
+  const [invitations, setInvitations] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
@@ -38,6 +38,16 @@ const AddUsersForm = (props) => {
       }
     }
 
+    return false;
+  };
+
+  const checkAlreadyJoinedUser = (id, accessUsers) => {
+    console.log(id, accessUsers);
+    for (let i = 0; i < accessUsers.length; i++) {
+      if (accessUsers[i] === id) {
+        return true;
+      }
+    }
     return false;
   };
 
@@ -74,12 +84,20 @@ const AddUsersForm = (props) => {
                 onClick={() => {
                   if (searchText === "") return;
                   if (checkDuplicateUser(searchText)) return;
+
                   setIsSearching(true);
                   props.findUser(searchText, (user) => {
                     setIsSearching(false);
+                    if (
+                      checkAlreadyJoinedUser(user.id, props.course.accessUsers)
+                    ) {
+                      alert("This user already joined");
+                      return;
+                    }
+
                     if (!user) return;
                     setUsers([...users, user]);
-                    setInvitions([
+                    setInvitations([
                       ...invitations,
                       {
                         ...inviteForm,
@@ -101,7 +119,9 @@ const AddUsersForm = (props) => {
             user={user}
             removeOnClick={({ id, email }) => {
               setUsers(users.filter((user) => user.id != id));
-              setInvitions(invitations.filter((invite) => invite.to != email));
+              setInvitations(
+                invitations.filter((invite) => invite.to != email)
+              );
             }}
           />
         ))}

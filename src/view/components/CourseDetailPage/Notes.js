@@ -21,6 +21,8 @@ const Notes = (props) => {
   const [addNoteForm, setAddNoteForm] = useState(false);
   const [focusNote, setFocusNote] = useState(null);
   const history = useHistory();
+  const [isAdding, setIsAdding] = useState(false);
+  const { currentUser } = useAuth();
 
   const customUser = props.user;
 
@@ -36,7 +38,9 @@ const Notes = (props) => {
   };
 
   const handleAddNote = (newNote) => {
+    setIsAdding(true);
     addNote(newNote, (response) => {
+      setIsAdding(false);
       if (response.status) {
         setNotes((previousNotes) => [newNote, ...previousNotes]);
       } else {
@@ -57,7 +61,9 @@ const Notes = (props) => {
   };
 
   const handleEditNote = (updatedNote) => {
+    setIsAdding(true);
     updateNoteTitle(updatedNote, (response) => {
+      setIsAdding(false);
       setFocusNote(null);
       if (response.status) {
         setNotes(
@@ -108,6 +114,7 @@ const Notes = (props) => {
         <AddIcon />
       </IconButton>
       <AddNoteForm
+        isAdding={isAdding}
         currentUser={customUser}
         formStatus={addNoteForm}
         course={props.course}
@@ -125,6 +132,7 @@ const Notes = (props) => {
       {notes.map((note) => (
         <NoteItem
           key={note.id}
+          isOwner={note.ownerId === currentUser.uid}
           note={note}
           onClick={() => moveToNotePage(note)}
           deleteNote={(noteId) => handleDeleteNote(noteId)}

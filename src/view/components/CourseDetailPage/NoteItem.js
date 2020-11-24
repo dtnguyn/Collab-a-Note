@@ -13,35 +13,39 @@ const NoteItem = (props) => {
   return (
     <div className="note-item-container">
       <div onClick={props.onClick}>
-        <h3 data-testid="title">{props.note.title}</h3>
-        <p data-testid="creation-date">
+        <h3 data-testid="title" className="note-item-title">
+          {props.note.title}
+        </h3>
+        <p data-testid="creation-date" className="note-item-sub">
           created {props.note.creationDate.toLocaleDateString("en-US")}
         </p>
-        <p data-testid="last-update">
+        <p data-testid="last-update" className="note-item-sub">
           last updated {props.note.lastUpdate.toLocaleDateString("en-US")}
         </p>
       </div>
+      {props.isOwner ? (
+        <div className="note-buttons-container">
+          <IconButton
+            onClick={() => {
+              props.deleteNote(props.note.id);
+            }}
+            style={noteButtonsStyle}
+          >
+            <Delete />
+          </IconButton>
 
-      <div className="note-buttons-container">
-        <IconButton
-          onClick={() => {
-            props.deleteNote(props.note.id);
-          }}
-          style={noteButtonsStyle}
-        >
-          <Delete />
-        </IconButton>
+          <IconButton
+            data-testid="edit-button"
+            onClick={() => {
+              props.openEditTitleForm();
+            }}
+            style={noteButtonsStyle}
+          >
+            <Edit />
+          </IconButton>
+        </div>
+      ) : null}
 
-        <IconButton
-          data-testid="edit-button"
-          onClick={() => {
-            props.openEditTitleForm();
-          }}
-          style={noteButtonsStyle}
-        >
-          <Edit />
-        </IconButton>
-      </div>
       <hr />
     </div>
   );

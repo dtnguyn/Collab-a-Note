@@ -9,6 +9,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../../context/AuthContext";
+import { CircularProgress } from "@material-ui/core";
 
 const AddCourseForm = (props) => {
   const [newCourse, setNewCourse] = useState({
@@ -99,24 +100,29 @@ const AddCourseForm = (props) => {
           <Button onClick={props.handleClose} color="primary">
             Cancel
           </Button>
-          <Button
-            disabled={newCourse.name === ""}
-            onClick={() => {
-              const id = createNewCourseId();
-              const creationDate = getCurrentTime();
-              const lastUpdate = getCurrentTime();
 
-              props.addCourse({
-                ...newCourse,
-                id,
-                creationDate,
-                lastUpdate,
-              });
-            }}
-            color="primary"
-          >
-            Add
-          </Button>
+          {props.isAdding ? (
+            <CircularProgress />
+          ) : (
+            <Button
+              disabled={newCourse.name === ""}
+              onClick={() => {
+                const id = createNewCourseId();
+                const creationDate = getCurrentTime();
+                const lastUpdate = getCurrentTime();
+
+                props.addCourse({
+                  ...newCourse,
+                  id,
+                  creationDate,
+                  lastUpdate,
+                });
+              }}
+              color="primary"
+            >
+              Add
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
     </div>

@@ -26,14 +26,16 @@ const DueDateItem = (props) => {
         {props.dueDate.deadline.toString()}
       </h4>
       <div className="due-date-item-button">
-        <IconButton
-          onClick={() => {
-            props.deleteDueDate(props.dueDate.id);
-          }}
-          style={dueDateButtonsStyle}
-        >
-          <Delete />
-        </IconButton>
+        {props.isOwner ? (
+          <IconButton
+            onClick={() => {
+              props.deleteDueDate(props.dueDate.id);
+            }}
+            style={dueDateButtonsStyle}
+          >
+            <Delete />
+          </IconButton>
+        ) : null}
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ import { getSingleUser } from "../../../controller/auth";
 const Comments = (props) => {
   const [comments, setComments] = useState([]);
   const [addCommentForm, setAddCommentForm] = useState(false);
-
+  const [isAdding, setIsAdding] = useState(false);
   const { currentUser } = useAuth();
   const [customUser, setCustomUser] = useState();
 
@@ -25,7 +25,9 @@ const Comments = (props) => {
   };
 
   const handleAddComment = (comment) => {
+    setIsAdding(true);
     addComment(comment, (response) => {
+      setIsAdding(false);
       setAddCommentForm(false);
       if (response.status) {
         setComments((prevComments) => [...prevComments, comment]);
@@ -84,6 +86,7 @@ const Comments = (props) => {
       </div>
 
       <AddCommentForm
+        isAdding={isAdding}
         currentUser={customUser}
         noteId={props.noteId}
         formStatus={addCommentForm}
